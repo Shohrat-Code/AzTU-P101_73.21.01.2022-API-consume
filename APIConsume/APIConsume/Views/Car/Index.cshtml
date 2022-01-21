@@ -1,0 +1,56 @@
+﻿@model List<VmModel>
+@inject IHttpContextAccessor _httpContext
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <a asp-controller="car" asp-action="create" class="btn btn-primary mb-5">Create</a>
+        </div>
+        <div class="col-lg-12">
+            @if (_httpContext.HttpContext.Session.GetString("Error") != null)
+            {
+                <div class="alert alert-danger">@_httpContext.HttpContext.Session.GetString("Error")</div>
+                _httpContext.HttpContext.Session.Remove("Error");
+            }
+        </div>
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Engine</th>
+                        <th scope="col">Color</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@item.Brand.Name</td>
+                                <td>@item.Name</td>
+                                <td>@item.Year</td>
+                                <td>@item.Engine</td>
+                                <td>@item.Color.Name</td>
+                                <td>
+                                    <a asp-controller="car" asp-action="update" asp-route-id="@item.Id" class="btn btn-warning">Update</a>
+                                    <a asp-controller="car" asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

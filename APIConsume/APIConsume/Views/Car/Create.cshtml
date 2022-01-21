@@ -1,0 +1,49 @@
+﻿@model VmModelCreate
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form asp-controller="car" asp-action="create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.BrandId" class="form-label">Brand</label>
+                    <select class="form-control" asp-for="@Model.BrandId" asp-items="@(new SelectList(ViewBag.Brand,"Id", "Name"))">
+                        <option selected disabled>Select brand</option>
+                    </select>
+                    <span asp-validation-for="@Model.BrandId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label">Model</label>
+                    <input asp-for="@Model.Name" class="form-control">
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Year" class="form-label">Year</label>
+                    <input asp-for="@Model.Year" class="form-control">
+                    <span asp-validation-for="@Model.Year" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Engine" class="form-label">Engine</label>
+                    <input asp-for="@Model.Engine" class="form-control">
+                    <span asp-validation-for="@Model.Engine" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.ColorId" class="form-label">Color</label>
+                    <select class="form-control" asp-for="@Model.ColorId" asp-items="@(new SelectList(ViewBag.Color,"Id", "Name"))">
+                        <option selected disabled>Select color</option>
+                    </select>
+                    <span asp-validation-for="@Model.ColorId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.ImageFile" class="form-label">Image</label>
+                    <input asp-for="@Model.ImageFile" class="form-control">
+                    <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
